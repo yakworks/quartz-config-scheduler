@@ -8,8 +8,8 @@ buildscript {
     }
 }
 
-version "0.1"
-group "grails.plugin.quartzconfigschedular"
+version "0.2"
+group "org.grails.plugins"
 
 
 apply plugin:"idea"
@@ -49,15 +49,22 @@ bootRun {
 }
 // enable if you wish to package this plugin as a standalone application
 bootRepackage.enabled = false
+
+
 grailsPublish {
-    // TODO: Provide values here
-    user = 'user'
-    key = 'key'
-    githubSlug = 'foo/bar'
+    user = System.getenv("BINTRAY_USER") ?: project.bintrayUser
+    key = System.getenv("BINTRAY_KEY") ?: project.bintrayKey
+
+    desc = 'Allow creating quartz job from configuration'
+    developers = [snimavat: 'Sudhir Nimavat']
+    githubSlug = '9ci/quartz-config-schedular'
+    issueTrackerUrl = 'https://github.com/9ci/quartz-config-schedular/issues'
+    vcsUrl = 'https://github.com/9ci/quartz-config-schedular'
     license {
         name = 'Apache-2.0'
     }
-    title = "My Plugin"
-    desc = "Full plugin description"
-    developers = [johndoe:"John Doe"]
+    title = 'Quartz Config Schedular Plugin'
+    //userOrg = '9ci' //the Org to publish this under in
+    repo = 'grails-plugins' //the repository you setup in bintray
+    userOrg = '9ci'
 }
