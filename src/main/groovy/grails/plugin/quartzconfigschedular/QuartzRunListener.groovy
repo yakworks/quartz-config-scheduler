@@ -17,7 +17,11 @@ class QuartzRunListener implements SpringApplicationRunListener {
 
 	public QuartzRunListener(SpringApplication application, String[] args) { }
 
-	@Override
+
+	/* Spring Boot 1.5 or higher */
+	void starting() { }
+
+	/* Spring Boot 1.4 */
 	void started() { }
 
 	@Override
