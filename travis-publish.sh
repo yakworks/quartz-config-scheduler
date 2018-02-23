@@ -7,10 +7,10 @@ if [[ -n $TRAVIS_TAG ]] || [[ $TRAVIS_BRANCH == 'master' && $TRAVIS_REPO_SLUG ==
     if [[ -n $TRAVIS_TAG ]]
     then
         echo "### publishing release to BinTray"
-        ./gradlew view-tools:bintrayUpload --no-daemon
+        ./gradlew quartz-config-scheduler:bintrayUpload --no-daemon
     else
          echo "### publishing snapshot"
-        ./gradlew view-tools:publish --no-daemon
+        ./gradlew quartz-config-scheduler:publish --no-daemon
     fi
 
 else
