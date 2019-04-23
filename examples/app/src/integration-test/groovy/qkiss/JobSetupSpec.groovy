@@ -1,8 +1,9 @@
 package qkiss
 
-import grails.transaction.Rollback
+import grails.gorm.transactions.Rollback
+import grails.testing.mixin.integration.Integration
 
-@grails.test.mixin.integration.Integration
+@Integration
 @Rollback
 class JobSetupSpec extends spock.lang.Specification {
 

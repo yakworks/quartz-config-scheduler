@@ -1,13 +1,14 @@
 package qkiss
 
 import grails.plugin.quartzconfigscheduler.SpringBeanJob
+import grails.testing.mixin.integration.Integration
 import grails.transaction.Rollback
 import org.quartz.Trigger
 
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule
 import static org.quartz.TriggerBuilder.newTrigger
 
-@grails.test.mixin.integration.Integration
+@Integration
 @Rollback
 class SpringBeanJobSpec extends spock.lang.Specification {
 

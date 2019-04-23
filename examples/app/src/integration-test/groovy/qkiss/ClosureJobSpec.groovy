@@ -1,11 +1,12 @@
 package qkiss
 
+import grails.gorm.transactions.Rollback
 import grails.plugin.quartzconfigscheduler.ClosureJob
-import grails.transaction.Rollback
+import grails.testing.mixin.integration.Integration
 import org.quartz.Trigger
 import org.quartz.impl.triggers.SimpleTriggerImpl
 
-@grails.test.mixin.integration.Integration
+@Integration
 @Rollback
 class ClosureJobSpec extends spock.lang.Specification {
 
