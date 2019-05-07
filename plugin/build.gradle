@@ -22,10 +22,8 @@ bootRun {
 }
 
 ext.codenarcRuleset= '''
-  getRule('LineLength').enabled = false
   getRule('CyclomaticComplexity').enabled = false
   getRule('NoWildcardImports').enabled = false
-  //getRule('Println').enabled = false
 '''
 
 codenarcMain {
