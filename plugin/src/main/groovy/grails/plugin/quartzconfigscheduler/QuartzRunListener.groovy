@@ -1,13 +1,19 @@
+/*
+* Copyright 2019 Yak.Works - Licensed under the Apache License, Version 2.0 (the "License")
+* You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+*/
 package grails.plugin.quartzconfigscheduler
 
-import grails.core.GrailsApplication
 import groovy.transform.CompileDynamic
 import groovy.util.logging.Slf4j
+
 import org.quartz.Scheduler
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.SpringApplicationRunListener
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.core.env.ConfigurableEnvironment
+
+import grails.core.GrailsApplication
 
 /**
  * Spring application run listener to schedule jobs defined in config.
