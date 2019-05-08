@@ -4,7 +4,7 @@
 */
 package grails.plugin.quartzconfigscheduler
 
-import grails.plugins.*
+import grails.plugins.Plugin
 
 class QuartzConfigSchedulerGrailsPlugin extends Plugin {
 
