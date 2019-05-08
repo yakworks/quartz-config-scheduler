@@ -10,7 +10,7 @@ Install
 --- 
 
 ```groovy
-compile "org.grails.plugins:quartz-config-scheduler:0.5"
+compile "org.grails.plugins:quartz-config-scheduler:2.0.0"
 ```
 
 Quartz config scheduler
