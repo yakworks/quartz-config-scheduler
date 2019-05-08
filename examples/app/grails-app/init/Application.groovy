@@ -1,6 +1,7 @@
+import org.springframework.context.annotation.Bean
+
 import grails.boot.GrailsApp
 import grails.boot.config.GrailsAutoConfiguration
-import org.springframework.context.annotation.Bean
 import qkiss.TestBean
 
 class Application extends GrailsAutoConfiguration {
