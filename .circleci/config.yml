@@ -1,28 +1,19 @@
 # circleCI build file
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
-      # docker image with python and mkdocs on it already as well, based on gradle:4.6-alpine
-      - image: yakworks/alpine-java:gradle-4.10.3
-    #    branches:
-    #      only:
-    #        - master
-
-    # working_directory: ~/repo
+      - image: yakworks/alpine-jdk:builder8
 
     environment:
-      # Customize the JVM maximum heap limit
-      # JVM_OPTS: -Xmx3200m
-      MALLOC_ARENA_MAX: 2
-      GRADLE_OPTS: "-Xmx3048m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Dorg.gradle.daemon=false" #daemon false doesn't seem to get picked up by fork
-      TERM: dumb
+      GRADLE_OPTS: "-Xmx1536m -Dorg.gradle.daemon=false" #daemon false doesn't seem to get picked up by fork
+      # TERM: dumb
 
     parallelism: 1
-    # resource_class: large
 
     steps:
       - checkout
+      - compare-url/reconstruct
       # Download and cache dependencies
       - run:
           name: cat build.gradle files for cache key
@@ -35,12 +26,12 @@ jobs:
       # this also kind of helps with the memory issue we keep running into by breaking it up
       - run:
           name: ✔︎ -- Downloads Dependencies [gradle resolveConfigurations]
-          command: gradle resolveConfigurations --no-daemon
+          command: ./gradlew resolveConfigurations --no-daemon
 
       # compiling as a seperate step before running check helps with the "finished with non-zero exit value 137" error
       - run:
           name: ✔︎ -- Compile [gradle classes]
-          command: gradle classes --no-daemon
+          command: ./gradlew classes --no-daemon
 
       - save_cache:
           paths:
@@ -51,7 +42,8 @@ jobs:
 
       - run:
           name: ✔︎ -- Checks Linter and Tests [gradle check]
-          command: gradle check --no-daemon --max-workers 2
+          command: ./gradlew check --no-daemon --max-workers 2
+
       - store_artifacts:
           path: plugin/build/reports/tests/test/
           destination: test-reports/unit/
@@ -69,6 +61,13 @@ jobs:
       ### Finally do the build and publish. ciPublish will check if this is a PR or on a branch that should not be published
       - run:
           name: ✔︎ -- Publish Library if needed [gradle ciPublish]
-          command: gradle ciPublish --no-daemon
+          command: ./gradlew ciPublish --no-daemon
 
+orbs:
+  compare-url: iynere/compare-url@1.2.0
 
+workflows:
+  build-flow:
+    jobs:
+      - build:
+          context: bot-context #context with shared ENV vars
